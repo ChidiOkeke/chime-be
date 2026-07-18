@@ -103,6 +103,15 @@ app.post('/api/rsvp', async (req, res) => {
     }
 })
 
+app.get('/api/health', async (req, res) => {
+    try {
+        return res.json({ status: 'ok'})
+    } catch (err) {
+        const message = err instanceof Error ? err.message : 'Unknown error'
+        return res.status(500).json({ status: 'error', error: message })
+    }
+})
+
 app.listen(PORT, () => {
     console.log(`Wedding RSVP backend listening on :${PORT}`)
 })
